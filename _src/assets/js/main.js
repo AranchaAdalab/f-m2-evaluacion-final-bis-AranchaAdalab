@@ -9,6 +9,7 @@ let number = 4;
 const list = document.querySelector('.cards_list');
 const photoAdalab = 'https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB';
 let savedNumber = localStorage.getItem('number');
+let arrPair = [];
 
 if (savedNumber === null) {
   input4.setAttribute('checked', '');
@@ -38,7 +39,8 @@ function search () {
     .then (data => {
       for (const result of data) {
         const pokemon = result.image;
-        list.innerHTML += `<li class="item_pokemon"><img class="pokemon_photo hidden" src="${pokemon}"><img class="adalab_photo" src="${photoAdalab}"></li>`;
+        const pair = result.pair;
+        list.innerHTML += `<li class="item_pokemon"><img class="pokemon_photo hidden" src="${pokemon}"><img class="adalab_photo" src="${photoAdalab}"><p class="pair_number">${pair}</p></li>`;
       }
       const allPokemon = document.querySelectorAll('li');
       for (const li of allPokemon) {
@@ -51,8 +53,24 @@ function frontBack(event) {
   const li = event.currentTarget;
   const photo = li.querySelector('.pokemon_photo');
   const photoGreen = li.querySelector('.adalab_photo');
+  const pairNumber = li.querySelector('.pair_number').innerHTML;
   photo.classList.toggle('hidden');
   photoGreen.classList.toggle('hidden');
+  arrPair.push(pairNumber);
+  console.log(arrPair);
+  if (arrPair.length === 2) {
+    game();
+  }
+
+  function game() {
+    for (let i=0; i<3; i++) {
+      if (arrPair[0] !== arrPair[1]) {
+        photoGreen.classList.remove('hidden');
+        photo.classList.add('hidden');
+      }
+    }
+    arrPair = [];
+  }
 }
 
 for (const inputItem of input) {
