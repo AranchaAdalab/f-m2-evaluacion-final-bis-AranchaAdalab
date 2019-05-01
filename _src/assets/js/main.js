@@ -19,7 +19,7 @@ function search () {
     .then (data => {
       for (const result of data) {
         const pokemon = result.image;
-        list.innerHTML += `<li class="item_pokemon"><img class="pokemon_photo" src="${pokemon}"><img class="adalab_photo hidden" src="${photoAdalab}"></li>`;
+        list.innerHTML += `<li class="item_pokemon"><img class="pokemon_photo hidden" src="${pokemon}"><img class="adalab_photo" src="${photoAdalab}"></li>`;
       }
       const allPokemon = document.querySelectorAll('li');
       for (const li of allPokemon) {

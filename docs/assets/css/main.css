@@ -1,0 +1,1 @@
+body {height: 100vh;margin: 0;}.main_container {display: -webkit-box;display: -ms-flexbox;display: flex;}.cards_list {display: -webkit-box;display: -ms-flexbox;display: flex;list-style: none;}.item_pokemon {margin: 5px;}.pokemon_photo {width: 160px;height: 195px;border-radius: 5px;}.hidden {display: none;}

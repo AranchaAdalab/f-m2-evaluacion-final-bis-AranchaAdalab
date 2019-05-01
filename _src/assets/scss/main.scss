@@ -10,12 +10,6 @@ body {
   display: flex;
 }
 
-.pokemon_photo {
-  width: 160px;
-  height: 195px;
-  border-radius: 5px;
-}
-
 .cards_list {
   display: flex;
   list-style: none;
@@ -23,6 +17,12 @@ body {
 
 .item_pokemon {
   margin: 5px;
+}
+
+.pokemon_photo {
+  width: 160px;
+  height: 195px;
+  border-radius: 5px;
 }
 
 .hidden {
