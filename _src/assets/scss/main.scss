@@ -1,18 +1,31 @@
 @import 'core/settings';
 
 body {
-	// background: url('../images/logo-adalab-80px.png') center center no-repeat $color-white;
+  background: linear-gradient(to bottom, rgb(244, 246, 247), grey);
+  text-align: center;
   height: 100vh;
+  width: 100vw;
   margin: 0;
+  display: flex;
+  justify-content: center;
 }
 
 .main_container {
   display: flex;
+  justify-content: center;
+}
+
+.start {
+  margin-left: 9px;
+  padding: 5px;
+  border: solid 1px black;
+  border-radius: 5px;
 }
 
 .cards_list {
   display: flex;
   list-style: none;
+  flex-wrap: wrap;
 }
 
 .item_pokemon {
