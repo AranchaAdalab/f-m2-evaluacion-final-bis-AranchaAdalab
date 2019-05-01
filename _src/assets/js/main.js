@@ -2,13 +2,32 @@
 
 const start = document.querySelector('.start');
 const input = document.querySelectorAll('.input');
+const input4 = document.querySelector('#four_cards');
+const input6 = document.querySelector('#six_cards');
+const input8 = document.querySelector('#eight_cards');
 let number = 4;
 const list = document.querySelector('.cards_list');
 const photoAdalab = 'https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB';
+let savedNumber = localStorage.getItem('number');
+
+if (savedNumber === null) {
+  input4.setAttribute('checked', '');
+  number = 4;
+} else if (savedNumber === '4') {
+  input4.setAttribute('checked', '');
+  number = 4;
+} else if (savedNumber === '6') {
+  input6.setAttribute('checked', '');
+  number = 6;
+} else {
+  input8.setAttribute('checked', '');
+  number = 8;
+}
 
 function numberCards(event) {
   const gilty = event.currentTarget;
   number = gilty.value;
+  localStorage.setItem('number', number);
 }
 
 function search () {
