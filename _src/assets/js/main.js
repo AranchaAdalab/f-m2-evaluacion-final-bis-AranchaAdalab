@@ -42,7 +42,7 @@ function search () {
         const pair = result.pair;
         const li = document.createElement('li');
         li.classList.add('item_pokemon');
-        li.innerHTML = `<img class="pokemon_photo hidden" src="${pokemon}"><img class="adalab_photo" src="${photoAdalab}"><p class="pair_number">${pair}</p>`;
+        li.innerHTML = `<img class="pokemon_photo hidden" src="${pokemon}"><img class="adalab_photo" src="${photoAdalab}"><p class="pair_number hidden">${pair}</p>`;
         li.addEventListener('click', frontBack);
         list.appendChild(li);
       }
@@ -55,7 +55,6 @@ function frontBack(event) {
   for (const image of arrImg) {
     image.classList.toggle('hidden');
   }
-  console.log(arrPair);
   if (arrPair.includes(li)) {
     arrPair = [];
   } else {
@@ -73,20 +72,28 @@ function game(arrLi) {
   for (const li of arrLi) {
     const number = li.querySelector('.pair_number').innerHTML;
     arrNumbers.push(number);
-    console.log(arrNumbers);
     const photo = li.querySelector('.pokemon_photo');
     const photoGreen = li.querySelector('.adalab_photo');
     photos.push(photo, photoGreen);
-    console.log(photos);
     if (arrNumbers[0] === arrNumbers[1]) {
       // arrLi.forEach(elem=>elem.removeEventListener('click', frontBack));
       for (const elem of arrLi) {
         elem.removeEventListener('click', frontBack);
       }
-    } else if (arrNumbers.length === 2) {
-      setTimeout(()=>{
-        photoGreen.classList.remove('hidden');
-        photo.classList.add('hidden');
+      for (const itemPhoto of photos) {
+        if (itemPhoto.classList.contains('pokemon_photo')) {
+          itemPhoto.classList.add('selected');
+        }
+      }
+    } else if (arrNumbers[0] !== arrNumbers[1] && arrNumbers.length === 2) {
+      setTimeout( () => {
+        for (const itemPhoto of photos) {
+          if (itemPhoto.classList.contains('adalab_photo')) {
+            itemPhoto.classList.remove('hidden');
+          } else {
+            itemPhoto.classList.add('hidden');
+          }
+        }
       }, 2000);
     } else {
       continue;
