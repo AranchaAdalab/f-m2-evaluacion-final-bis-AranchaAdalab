@@ -40,36 +40,57 @@ function search () {
       for (const result of data) {
         const pokemon = result.image;
         const pair = result.pair;
-        list.innerHTML += `<li class="item_pokemon"><img class="pokemon_photo hidden" src="${pokemon}"><img class="adalab_photo" src="${photoAdalab}"><p class="pair_number">${pair}</p></li>`;
-      }
-      const allPokemon = document.querySelectorAll('li');
-      for (const li of allPokemon) {
+        const li = document.createElement('li');
+        li.classList.add('item_pokemon');
+        li.innerHTML = `<img class="pokemon_photo hidden" src="${pokemon}"><img class="adalab_photo" src="${photoAdalab}"><p class="pair_number">${pair}</p>`;
         li.addEventListener('click', frontBack);
+        list.appendChild(li);
       }
     });
 }
 
 function frontBack(event) {
   const li = event.currentTarget;
-  const photo = li.querySelector('.pokemon_photo');
-  const photoGreen = li.querySelector('.adalab_photo');
-  const pairNumber = li.querySelector('.pair_number').innerHTML;
-  photo.classList.toggle('hidden');
-  photoGreen.classList.toggle('hidden');
-  arrPair.push(pairNumber);
-  console.log(arrPair);
-  if (arrPair.length === 2) {
-    game();
+  const arrImg = li.querySelectorAll('img');
+  for (const image of arrImg) {
+    image.classList.toggle('hidden');
   }
+  console.log(arrPair);
+  if (arrPair.includes(li)) {
+    arrPair = [];
+  } else {
+    arrPair.push(li);
+  }
+  if (arrPair.length === 2) {
+    game(arrPair);
+    arrPair = [];
+  }
+}
 
-  function game() {
-    for (let i=0; i<3; i++) {
-      if (arrPair[0] !== arrPair[1]) {
+function game(arrLi) {
+  let arrNumbers = [];
+  let photos = [];
+  for (const li of arrLi) {
+    const number = li.querySelector('.pair_number').innerHTML;
+    arrNumbers.push(number);
+    console.log(arrNumbers);
+    const photo = li.querySelector('.pokemon_photo');
+    const photoGreen = li.querySelector('.adalab_photo');
+    photos.push(photo, photoGreen);
+    console.log(photos);
+    if (arrNumbers[0] === arrNumbers[1]) {
+      // arrLi.forEach(elem=>elem.removeEventListener('click', frontBack));
+      for (const elem of arrLi) {
+        elem.removeEventListener('click', frontBack);
+      }
+    } else if (arrNumbers.length === 2) {
+      setTimeout(()=>{
         photoGreen.classList.remove('hidden');
         photo.classList.add('hidden');
-      }
+      }, 2000);
+    } else {
+      continue;
     }
-    arrPair = [];
   }
 }
 
