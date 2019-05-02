@@ -76,7 +76,6 @@ function game(arrLi) {
     const photoGreen = li.querySelector('.adalab_photo');
     photos.push(photo, photoGreen);
     if (arrNumbers[0] === arrNumbers[1]) {
-      // arrLi.forEach(elem=>elem.removeEventListener('click', frontBack));
       for (const elem of arrLi) {
         elem.removeEventListener('click', frontBack);
       }
