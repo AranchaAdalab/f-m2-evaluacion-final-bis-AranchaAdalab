@@ -9,6 +9,7 @@ let number = 4;
 const list = document.querySelector('.cards_list');
 const photoAdalab = 'https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB';
 let savedNumber = localStorage.getItem('number');
+const log = document.querySelector('.log');
 
 if (savedNumber === null) {
   input4.setAttribute('checked', '');
@@ -38,7 +39,13 @@ function search () {
     .then (data => {
       for (const result of data) {
         const pokemon = result.image;
-        list.innerHTML += `<li class="item_pokemon"><img class="pokemon_photo hidden" src="${pokemon}"><img class="adalab_photo" src="${photoAdalab}"></li>`;
+        const number = result.pair;
+        const fav = result.fav;
+        if (fav === true) {
+          list.innerHTML += `<li class="item_pokemon"><img class="pokemon_photo hidden" src="${pokemon}"><img class="adalab_photo" src="${photoAdalab}"><p>favorito</p><p class="number_pair hidden">${number}</p></li>`;
+        } else {
+          list.innerHTML += `<li class="item_pokemon"><img class="pokemon_photo hidden" src="${pokemon}"><img class="adalab_photo" src="${photoAdalab}"><p class="number_pair hidden">${number}</p></li>`;
+        }
       }
       const allPokemon = document.querySelectorAll('li');
       for (const li of allPokemon) {
@@ -55,8 +62,17 @@ function frontBack(event) {
   photoGreen.classList.toggle('hidden');
 }
 
+function logPairs() {
+  const allPokemon = document.querySelectorAll('li');
+  for (const li of allPokemon) {
+    const numberLi = li.querySelector('.number_pair').innerHTML;
+    console.log(numberLi);
+  }
+}
+
 for (const inputItem of input) {
   inputItem.addEventListener('change', numberCards);
 }
 
 start.addEventListener('click', search);
+log.addEventListener('click', logPairs);
