@@ -10,6 +10,7 @@ const list = document.querySelector('.cards_list');
 const photoAdalab = 'https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB';
 let savedNumber = localStorage.getItem('number');
 let arrPair = [];
+let finish = [];
 
 if (savedNumber === null) {
   input4.setAttribute('checked', '');
@@ -76,12 +77,15 @@ function game(arrLi) {
     const photoGreen = li.querySelector('.adalab_photo');
     photos.push(photo, photoGreen);
     if (arrNumbers[0] === arrNumbers[1]) {
+      finish.push(arrNumbers[0]);
+      finish.push(arrNumbers[1]);
       for (const elem of arrLi) {
         elem.removeEventListener('click', frontBack);
       }
       for (const itemPhoto of photos) {
         if (itemPhoto.classList.contains('pokemon_photo')) {
           itemPhoto.classList.add('selected');
+          endGame();
         }
       }
     } else if (arrNumbers[0] !== arrNumbers[1] && arrNumbers.length === 2) {
@@ -93,10 +97,18 @@ function game(arrLi) {
             itemPhoto.classList.add('hidden');
           }
         }
-      }, 2000);
+      }, 1500);
     } else {
       continue;
     }
+  }
+}
+
+function endGame () {
+  if (finish.length === number) {
+    alert('¡Has ganado!');
+  } else if (finish.length === savedNumber){
+    alert('¡Has ganado!');
   }
 }
 
